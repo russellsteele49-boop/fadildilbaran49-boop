@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Class Villa</title>
+
+  <!-- Font dari Google Fonts (butuh internet) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #ffffff;
+      line-height: 1.6;
+      /* Latar belakang: foto Unsplash oleh Slava Auchynnikau */
+      background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url("https://images.unsplash.com/photo-1783638204102-c20f956b5663?auto=format&fit=crop&w=1920&q=80")
+        center / cover fixed no-repeat;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 14px 6%;
+      background: rgba(0, 0, 0, 0.75);
+    }
+    nav .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: #f4c95d;
+      text-decoration: none;
+    }
+    nav ul { list-style: none; display: flex; gap: 22px; flex-wrap: wrap; }
+    nav ul a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+    nav ul a:hover { color: #f4c95d; }
+
+    /* ===== SECTION UMUM ===== */
+    section { padding: 100px 8% 60px; }
+    .judul {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #f4c95d;
+    }
+    .box {
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ===== HOME ===== */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    /* 3 kalimat, 3 font berbeda, 3 ukuran berbeda */
+    #home .kalimat1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      color: #f4c95d;
+    }
+    #home .kalimat2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 40px;
+      margin-top: 10px;
+    }
+    #home .kalimat3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 300;
+      margin-top: 14px;
+    }
+    .tombol {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 12px 30px;
+      background: #f4c95d;
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: transform 0.3s;
+    }
+    .tombol:hover { transform: scale(1.07); }
+
+    /* ===== TENTANG ===== */
+    #tentang p { text-align: center; font-size: 17px; }
+
+    /* ===== KEUNGGULAN ===== */
+    .unggul-list { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .unggul-item {
+      flex: 1 1 220px;
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 16px;
+      padding: 26px 20px;
+      text-align: center;
+    }
+    .unggul-item .nomor {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      color: #f4c95d;
+    }
+
+    /* ===== DAFTAR VILLA ===== */
+    .villa-list { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; }
+    .villa-card {
+      flex: 1 1 320px;
+      max-width: 440px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .villa-card img { width: 100%; height: 250px; object-fit: cover; display: block; }
+    .sumber {
+      font-size: 11px;
+      padding: 6px 20px 0;
+      color: #cfcfcf;
+    }
+    .sumber a { color: #f4c95d; }
+    .villa-info { padding: 14px 20px 24px; }
+    .villa-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: #f4c95d;
+    }
+    .harga { font-weight: 600; margin: 8px 0; }
+
+    /* ===== TESTIMONI ===== */
+    .testi-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+    .testi-card {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .testi-card p { font-style: italic; margin-bottom: 14px; }
+    .testi-card h4 { color: #f4c95d; }
+    .testi-card span { font-size: 13px; color: #cfcfcf; }
+
+    /* ===== KONTAK ===== */
+    #kontak .box { text-align: center; }
+    #kontak a { color: #f4c95d; }
+
+    /* ===== BOOKING ===== */
+    .btn-pesan {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 10px 24px;
+      background: #f4c95d;
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: transform 0.3s;
+    }
+    .btn-pesan:hover { transform: scale(1.07); }
+
+    #formBooking { display: grid; gap: 16px; }
+    #formBooking .baris {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    #formBooking label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    #formBooking input,
+    #formBooking select {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+    }
+    #formBooking button {
+      padding: 14px;
+      border: none;
+      border-radius: 30px;
+      background: #f4c95d;
+      color: #000;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    #formBooking button:hover { transform: scale(1.03); }
+
+    .ringkasan {
+      background: rgba(244, 201, 93, 0.15);
+      border: 1px solid #f4c95d;
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    .ringkasan .total {
+      font-size: 22px;
+      font-weight: 600;
+      color: #f4c95d;
+    }
+    .pesan-error { color: #ff8a8a; font-size: 14px; min-height: 20px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 24px 8%;
+      background: rgba(0, 0, 0, 0.8);
+      font-size: 13px;
+    }
+    footer a { color: #f4c95d; }
+
+    /* ===== HP / LAYAR KECIL ===== */
+    @media (max-width: 600px) {
+      #home .kalimat1 { font-size: 40px; }
+      #home .kalimat2 { font-size: 28px; }
+      nav { justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#home" class="logo">First Class Villa</a>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#keunggulan">Keunggulan</a></li>
+      <li><a href="#villa">Daftar Villa</a></li>
+      <li><a href="#testimoni">Testimoni</a></li>
+      <li><a href="#booking">Booking</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home">
+    <h1 class="kalimat1">First Class Villa</h1>
+    <h2 class="kalimat2">Selamat Datang di First Class Villa</h2>
+    <p class="kalimat3">Kami menyediakan Villa terbaik di Bali.</p>
+    <a href="#villa" class="tombol">Lihat Villa</a>
+  </section>
+
+  <!-- TENTANG -->
+  <section id="tentang">
+    <h2 class="judul">Tentang</h2>
+    <div class="box">
+      <p>
+        First Class Villa adalah Villa yang dirancang oleh keempat founder kami agar bisa
+        menemukan tempat penyewaan Villa yang terbaik mulai dari Pelayanan, Internet,
+        Pemandangan, Fasilitas, Kemudahan Reservasi DLL.
+      </p>
+    </div>
+  </section>
+
+  <!-- KEUNGGULAN -->
+  <section id="keunggulan">
+    <h2 class="judul">Keunggulan</h2>
+    <div class="unggul-list">
+      <div class="unggul-item">
+        <div class="nomor">1</div>
+        <p>Pemandangan alam dan wilayah pinggiran kota yang indah</p>
+      </div>
+      <div class="unggul-item">
+        <div class="nomor">2</div>
+        <p>Fasilitas yang lengkap</p>
+      </div>
+      <div class="unggul-item">
+        <div class="nomor">3</div>
+        <p>Harga Terjangkau</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAFTAR VILLA -->
+  <section id="villa">
+    <h2 class="judul">Daftar Villa</h2>
+    <div class="villa-list">
+
+      <!-- Villa Apollo -->
+      <div class="villa-card">
+        <img src="https://images.unsplash.com/photo-1719887805632-de5be825f72b?auto=format&fit=crop&w=900&q=80" alt="Villa Apollo">
+        <p class="sumber">
+          Foto: Jusuf Bachtiar –
+          <a href="https://unsplash.com/photos/a-house-with-a-lot-of-windows-and-palm-trees-nyceoSzBZxk" target="_blank">Sumber: Unsplash</a>
+        </p>
+        <div class="villa-info">
+          <h3>Villa Apollo</h3>
+          <p>Menawarkan pemandangan wilayah pinggiran kota</p>
+          <p class="harga">Start From : RP 15,000,000/malam</p>
+          <p>Fasilitas : 2 Kolam Renang, 15 Kamar Tidur, 9 Kamar Mandi, 1 GYM &amp; Tempat Bermain seperti Billiard &amp; Bowling</p>
+          <a href="#booking" class="btn-pesan" onclick="pilihVilla('Villa Apollo')">Booking Villa Apollo</a>
+        </div>
+      </div>
+
+      <!-- Villa Aphrodite -->
+      <div class="villa-card">
+        <img src="https://plus.unsplash.com/premium_photo-1723823037282-c004e4b1a194?auto=format&fit=crop&w=900&q=80" alt="Villa Aphrodite">
+        <p class="sumber">
+          Foto: hello aesthe –
+          <a href="https://unsplash.com/id/foto/kolam-renang-besar-di-sebelah-bangunan-batu-g-e_HN9VIJI" target="_blank">Sumber: Unsplash</a>
+        </p>
+        <div class="villa-info">
+          <h3>Villa Aphrodite</h3>
+          <p>Menawarkan pemandangan bali yang sangat cantik</p>
+          <p class="harga">Start From : RP 10,000,000/malam</p>
+          <p>Fasilitas : 1 Kolam Renang, 7 Kamar Tidur, 4 Kamar Mandi, 1 GYM &amp; Tempat Bermain seperti Billiard &amp; Bowling</p>
+          <a href="#booking" class="btn-pesan" onclick="pilihVilla('Villa Aphrodite')">Booking Villa Aphrodite</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TESTIMONI -->
+  <section id="testimoni">
+    <h2 class="judul">Testimoni</h2>
+    <div class="testi-list">
+
+      <div class="testi-card">
+        <p>"Liburan disini sangat - sangat nyaman saya bisa menjernihkan pikiran saya dari dunia sepak bola dan seolah saya hidup didunia yang berbeda."</p>
+        <h4>Cristiano Ronaldo</h4>
+        <span>Atlet Sepak Bola</span>
+      </div>
+
+      <div class="testi-card">
+        <p>"Saya menyewa villa ini untuk keperluan syuting dan saya tidak menyangka saya sangat betah sekali di tempat ini sampai menyewanya untuk kedua kalinya, pertama untuk keperluan syuting yang kedua untuk berlibur bersama keluarga."</p>
+        <h4>Christopher Nolan</h4>
+        <span>Sutradara</span>
+      </div>
+
+      <div class="testi-card">
+        <p>"Villa ini sangat nyaman saya menggunakan villa ini untuk beristirahat dari projek video youtube terbaru saya, Fasilitas &amp; Pemandangan dari villa ini membuat saya lupa akan lelahnya produksi projek video youtube."</p>
+        <h4>Mr. Beast / Jimmy Donaldson</h4>
+        <span>Influencer</span>
+      </div>
+
+      <div class="testi-card">
+        <p>"Diam - Diam saya sering ke Indonesia hanya untuk ke villa ini sambil mengerjakan tugas kantor. Vibes villa ini membuat pikiran saya sangat tenang padahal kerjaan menumpuk."</p>
+        <h4>Elon Musk</h4>
+        <span>Entrepreneur</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="booking">
+    <h2 class="judul">Booking Villa</h2>
+    <div class="box">
+      <form id="formBooking" onsubmit="kirimBooking(event)">
+
+        <div class="baris">
+          <div>
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+          </div>
+          <div>
+            <label for="telepon">Nomor WhatsApp</label>
+            <input type="tel" id="telepon" placeholder="Contoh: 0812xxxxxxxx" required>
+          </div>
+        </div>
+
+        <div class="baris">
+          <div>
+            <label for="villa-pilih">Pilih Villa</label>
+            <select id="villa-pilih" onchange="hitungTotal()" required>
+              <option value="">-- Pilih Villa --</option>
+              <option value="Villa Apollo">Villa Apollo - Rp 15.000.000/malam</option>
+              <option value="Villa Aphrodite">Villa Aphrodite - Rp 10.000.000/malam</option>
+            </select>
+          </div>
+          <div>
+            <label for="tamu">Jumlah Tamu</label>
+            <input type="number" id="tamu" min="1" max="50" value="2" required>
+          </div>
+        </div>
+
+        <div class="baris">
+          <div>
+            <label for="checkin">Tanggal Check-in</label>
+            <input type="date" id="checkin" onchange="hitungTotal()" required>
+          </div>
+          <div>
+            <label for="checkout">Tanggal Check-out</label>
+            <input type="date" id="checkout" onchange="hitungTotal()" required>
+          </div>
+        </div>
+
+        <div class="ringkasan">
+          <p>Villa : <span id="r-villa">-</span></p>
+          <p>Lama menginap : <span id="r-malam">-</span></p>
+          <p class="total">Total : <span id="r-total">Rp 0</span></p>
+        </div>
+
+        <p class="pesan-error" id="pesanError"></p>
+
+        <button type="submit">Booking Sekarang via WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- KONTAK -->
+  <section id="kontak">
+    <h2 class="judul">Kontak</h2>
+    <div class="box">
+      <p><strong>Alamat :</strong> Bali, Denpasar</p>
+      <p><strong>Whatsapp :</strong>
+        <a href="https://wa.me/6288078640001" target="_blank">088078640001</a>
+      </p>
+      <p><strong>Instagram :</strong>
+        <a href="https://instagram.com/fadildilbaran" target="_blank">fadildilbaran</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>First Class Villa &bull; Bali, Denpasar</p>
+    <p>
+      &copy; 2026 First Class Villa &bull; Semua foto dari
+      <a href="https://unsplash.com" target="_blank">Unsplash</a>
+      &bull; Gambar latar oleh Slava Auchynnikau –
+      <a href="https://unsplash.com/photos/snow-capped-mountain-range-at-twilight-4vp5pFmr_9A" target="_blank">Sumber: Unsplash</a>
+    </p>
+  </footer>
+
+  <script>
+    // Harga per malam tiap villa
+    var HARGA = {
+      "Villa Apollo": 15000000,
+      "Villa Aphrodite": 10000000
+    };
+    var NOMOR_WA = "6288078640001";
+
+    // Format angka jadi Rupiah
+    function rupiah(angka) {
+      return "Rp " + angka.toLocaleString("id-ID");
+    }
+
+    // Tanggal hari ini (format YYYY-MM-DD) supaya tanggal lampau tidak bisa dipilih
+    function hariIni() {
+      var d = new Date();
+      d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+      return d.toISOString().split("T")[0];
+    }
+    document.getElementById("checkin").min = hariIni();
+    document.getElementById("checkout").min = hariIni();
+
+    // Dipanggil dari tombol "Booking Villa ..." di kartu villa
+    function pilihVilla(namaVilla) {
+      document.getElementById("villa-pilih").value = namaVilla;
+      hitungTotal();
+    }
+
+    // Hitung jumlah malam & total harga
+    function hitungMalam() {
+      var masuk = document.getElementById("checkin").value;
+      var keluar = document.getElementById("checkout").value;
+      if (!masuk || !keluar) return 0;
+      var selisih = new Date(keluar) - new Date(masuk);
+      return Math.round(selisih / (1000 * 60 * 60 * 24));
+    }
+
+    function hitungTotal() {
+      var villa = document.getElementById("villa-pilih").value;
+      var masuk = document.getElementById("checkin").value;
+      var malam = hitungMalam();
+
+      // Check-out minimal sehari setelah check-in
+      if (masuk) {
+        var besok = new Date(masuk);
+        besok.setDate(besok.getDate() + 1);
+        document.getElementById("checkout").min = besok.toISOString().split("T")[0];
+      }
+
+      document.getElementById("r-villa").textContent = villa || "-";
+      document.getElementById("r-malam").textContent = malam > 0 ? malam + " malam" : "-";
+
+      var total = (villa && malam > 0) ? HARGA[villa] * malam : 0;
+      document.getElementById("r-total").textContent = rupiah(total);
+    }
+
+    // Validasi lalu kirim booking ke WhatsApp
+    function kirimBooking(e) {
+      e.preventDefault();
+      var error = document.getElementById("pesanError");
+      error.textContent = "";
+
+      var nama = document.getElementById("nama").value.trim();
+      var telepon = document.getElementById("telepon").value.trim();
+      var villa = document.getElementById("villa-pilih").value;
+      var tamu = document.getElementById("tamu").value;
+      var masuk = document.getElementById("checkin").value;
+      var keluar = document.getElementById("checkout").value;
+      var malam = hitungMalam();
+
+      if (!villa) { error.textContent = "Silakan pilih villa terlebih dahulu."; return; }
+      if (malam <= 0) { error.textContent = "Tanggal check-out harus setelah tanggal check-in."; return; }
+
+      var total = HARGA[villa] * malam;
+
+      var pesan =
+        "Halo First Class Villa, saya ingin booking:\n\n" +
+        "Nama: " + nama + "\n" +
+        "No. WhatsApp: " + telepon + "\n" +
+        "Villa: " + villa + "\n" +
+        "Check-in: " + masuk + "\n" +
+        "Check-out: " + keluar + "\n" +
+        "Lama menginap: " + malam + " malam\n" +
+        "Jumlah tamu: " + tamu + " orang\n" +
+        "Perkiraan total: " + rupiah(total) + "\n\n" +
+        "Mohon konfirmasi ketersediaannya. Terima kasih.";
+
+      window.open("https://wa.me/" + NOMOR_WA + "?text=" + encodeURIComponent(pesan), "_blank");
+    }
+  </script>
+
+</body>
+</html>
